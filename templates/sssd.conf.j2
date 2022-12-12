@@ -11,6 +11,7 @@ override_homedir = /home/%u
 [pam]
 
 [domain/{{ adauth_realm }}]
+timeout = 20
 dns_discovery_domain = {{ adauth_realm | lower }}
 description = LDAP domain with AD server
 cache_credentials = false
