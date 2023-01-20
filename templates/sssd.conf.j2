@@ -4,6 +4,7 @@ services = nss, pam, pac
 domains = {{ adauth_realm }}
 
 [nss]
+timeout = 30
 filter_groups = root,apache,oracle,tomcat,shibd,postgres,mysql,pse_d,pse_ds,pse_dt,pse_gen,zabbix,postfix,httpd
 filter_users = root,apache,oracle,tomcat,shibd,postgres,mysql,postfix,zabbix,httpd,pse_d0,pse_d1,pse_ds0,pse_ds1,pse_dt0,pse_dt1,pse_dt2
 override_homedir = /home/%u
@@ -11,7 +12,7 @@ override_homedir = /home/%u
 [pam]
 
 [domain/{{ adauth_realm }}]
-timeout = 20
+timeout = 30
 dns_discovery_domain = {{ adauth_realm | lower }}
 description = LDAP domain with AD server
 cache_credentials = false
