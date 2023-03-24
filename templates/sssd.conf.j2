@@ -49,7 +49,6 @@ ldap_schema = {{ sssd_ldap_schema }}
 ldap_user_search_base = {{ ldap_user_search_base }}
 ldap_group_search_base = {{ ldap_group_search_base }}
 ldap_group_nesting_level =  {{ sssd_ldap_group_nesting_level }}
-
 ldap_user_object_class = user
 ldap_user_name = sAMAccountName
 ldap_user_home_directory = unixHomeDirectory
@@ -57,13 +56,13 @@ ldap_user_home_directory = unixHomeDirectory
 ldap_user_principal = sAMAccountName
 # https://fedorahosted.org/sssd/ticket/2330
 #ldap_user_principal = nosuchattribute
-
 ldap_group_object_class = group
 ldap_group_name = sAMAccountName
-
 {% if sssd_auto_private_groups is defined %}
 auto_private_groups = {{ sssd_auto_private_groups }}
 {% endif %}
-
 ldap_force_upper_case_realm = true
-
+{% if sssd_ignore_group_members == 'true' or sssd_ignore_group_members %}
+ignore_group_members = true
+subdomain_inherit = ignore_group_members
+{% endif %}
