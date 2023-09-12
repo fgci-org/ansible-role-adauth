@@ -1,7 +1,7 @@
 [sssd]
 config_file_version = 2
-services = nss, pam, pac
-domains = {{ adauth_realm }}
+services = nss, pam
+domains = {{ krb5_realm }}
 
 [nss]
 timeout = 30
@@ -11,21 +11,21 @@ override_homedir = /home/%u
 
 [pam]
 
-[domain/{{ adauth_realm }}]
+[domain/{{ krb5_realm }}]
 timeout = 30
-dns_discovery_domain = {{ adauth_realm | lower }}
+dns_discovery_domain = {{ krb5_realm | lower }}
 description = LDAP domain with AD server
 cache_credentials = false
-enumerate = false
-min_id = 1000
+#enumerate = false
+min_id = 1500
 # AD is case insensitive
 case_sensitive = false
 id_provider = ldap
 auth_provider = krb5
 chpass_provider = krb5
 access_provider = ldap
-krb5_realm = {{ adauth_realm }}
-krb5_auth_timeout = 15
+krb5_realm = {{ krb5_realm }}
+#krb5_auth_timeout = 15
 krb5_validate = true
 krb5_renewable_lifetime = 35000
 krb5_renew_interval = 6000
@@ -36,7 +36,7 @@ krb5_ccname_template = KEYRING:persistent:%U
 ldap_access_order = expire
 ldap_account_expire_policy = ad
 ldap_pwd_policy = mit_kerberos
-ldap_sasl_mech = gssapi
+ldap_sasl_mech = GSSAPI
 ldap_sasl_canonicalize = true
 ldap_krb5_keytab = /etc/krb5.keytab
 ldap_krb5_init_creds = true
