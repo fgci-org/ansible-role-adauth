@@ -66,3 +66,7 @@ ldap_force_upper_case_realm = true
 ignore_group_members = true
 subdomain_inherit = ignore_group_members
 {% endif %}
+
+{% if ldap_user_principal is defined %}
+ldap_user_principal = {{ ldap_user_principal }}
+{% endif %}
