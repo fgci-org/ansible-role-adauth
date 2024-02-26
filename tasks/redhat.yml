@@ -2,7 +2,7 @@
 # tasks file for roles/ansible-role-adauth
 
 - name: Install sssd-client
-  yum: 
+  ansible.builtin.package:
     name: 
       - adcli
       - sssd-krb5
@@ -23,5 +23,5 @@
   service:
     name: "{{ sssd_service }}"
     enabled: true
-    state: started
+    state: "{{ sssd_service_state }}"
 

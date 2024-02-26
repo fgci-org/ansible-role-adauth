@@ -5,3 +5,4 @@
   service:
     name: "{{ sssd_service }}"
     state: restarted
+  when: sssd_service_state == 'started'
